@@ -1,0 +1,86 @@
+{
+    "build": { "KEEP_USER": "www-data" },
+    "meta": {
+        "name": "lepp",
+        "version": "0.1",
+        "containers": [
+            { 
+                "name": "lepp",
+                "version": "0.1",
+                "environment": {
+                    "INIT_URL": "https://s3.amazonaws.com/lexp-test/test.tar.gz"
+                },
+                "mountPoints": [
+                    {
+                        "sourceVolume": "webroot",
+                        "containerPath": "/var/www/html",
+                        "readOnly": false
+                    },
+                    {
+                        "sourceVolume": "vhosts",
+                        "containerPath": "/etc/turnkey/vhosts",
+                        "readOnly": false
+                    },
+                    {
+                        "sourceVolume": "initdb",
+                        "containerPath": "/etc/turnkey/initdb",
+                        "readOnly": false
+                    }
+                ],
+                "pre_confs": [
+                    {
+                        "name": "php-fpm",
+                        "version": "7.2"
+                    }
+                ],
+                "cpu": 512,
+                "ram": 512
+            },
+            {
+
+                "name": "nginx",
+                "version": "1.14.0",
+                "ports": { "80": "tcp", "443": "tcp" },
+                "mountPoints": [
+                    {
+                        "sourceVolume": "webroot",
+                        "containerPath": "/var/www/html",
+                        "readOnly": true
+                    },
+                    {
+                        "sourceVolume": "vhosts",
+                        "containerPath": "/etc/turnkey/vhosts",
+                        "readOnly": true
+                    }
+                ],
+                "cpu": 256,
+                "ram": 512
+            },
+            {
+                "name": "postgres",
+                "version": "11",
+                "cpu": 256,
+                "ram": 1024,
+                "mountPoints": [
+                    {
+                        "sourceVolume": "initdb",
+                        "containerPath": "/etc/turnkey/initdb",
+                        "readOnly": true
+                    },
+                    {
+                        "sourceVolume": "secrets",
+                        "containerPath": "/etc/turnkey/secrets",
+                        "readOnly": true
+                    }
+                ]
+            }
+        ],
+        "volumes": [
+            { "name": "webroot" },
+            { "name": "db-data" },
+            { "name": "initdb" },
+            { "name": "secrets" },
+            { "name": "vhosts" }
+        ]
+    }
+}
