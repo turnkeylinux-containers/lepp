@@ -1,12 +1,14 @@
 {
-    "build": { "KEEP_USER": "www-data" },
     "meta": {
-        "name": "lepp",
-        "version": "0.1",
+        "build_args": {
+            "PRODUCT_NAME": "lepp",
+            "PRODUCT_VERSION": "0.2",
+            "KEEP_USER": "www-data"
+        },
         "containers": [
             { 
                 "name": "lepp",
-                "version": "0.1",
+                "version": "0.2",
                 "environment": {
                     "INIT_URL": "https://s3.amazonaws.com/lexp-test/test.tar.gz"
                 },
@@ -27,19 +29,13 @@
                         "readOnly": false
                     }
                 ],
-                "pre_confs": [
-                    {
-                        "name": "php-fpm",
-                        "version": "7.2"
-                    }
-                ],
                 "cpu": 512,
                 "ram": 512
             },
             {
 
                 "name": "nginx",
-                "version": "1.14.0",
+                "version": "1.14.2",
                 "ports": { "80": "tcp", "443": "tcp" },
                 "mountPoints": [
                     {
