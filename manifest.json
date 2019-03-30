@@ -3,7 +3,7 @@
         "build_args": {
             "PRODUCT_NAME": "lepp",
             "PRODUCT_VERSION": "0.2",
-            "BASE_IMAGE": "php-fpm:7.3",
+            "BASE_IMAGE": "$REPO/php-fpm:7.3",
             "KEEP_USER": "www-data"
         },
         "containers": [
