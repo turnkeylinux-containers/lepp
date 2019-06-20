@@ -2,14 +2,14 @@
     "meta": {
         "build_args": {
             "PRODUCT_NAME": "lepp",
-            "PRODUCT_VERSION": "0.2",
+            "PRODUCT_VERSION": "0.3",
             "BASE_IMAGE": "$REPO/php-fpm:7.3",
             "KEEP_USER": "www-data"
         },
         "containers": [
             { 
                 "name": "lepp",
-                "version": "0.2",
+                "version": "0.3",
                 "environment": {
                     "INIT_URL": "https://s3.amazonaws.com/lexp-test/test.tar.gz"
                 },
