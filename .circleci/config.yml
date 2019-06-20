@@ -52,9 +52,9 @@ jobs:
             aws cloudformation delete-stack --stack-name "$PRODUCT_NAME-$CIRCLE_BUILD_NUM"
             aws cloudformation wait stack-delete-complete --stack-name "$PRODUCT_NAME-$CIRCLE_BUILD_NUM"
       - run:
-		  name: Cleaning up CF stack
-		  when: on_fail
-		  command: |
+          name: Cleaning up CF stack
+          when: on_fail
+          command: |
             aws cloudformation delete-stack --stack-name "$PRODUCT_NAME-$CIRCLE_BUILD_NUM" || true
             aws cloudformation wait stack-delete-complete --stack-name "$PRODUCT_NAME-$CIRCLE_BUILD_NUM" || true
 
